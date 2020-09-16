@@ -39,7 +39,7 @@
         <jar destfile="build/jar/ER-Editor.jar" basedir="build/class">
 			<manifest>
 				<attribute name="ER_editor" value="main"/>
-                <attribute name="Main-Class" value="ER_Editor"/>
+                <attribute name="Main-Class" value="main.ER_Editor"/>
             </manifest>
         </jar>
     </target>
