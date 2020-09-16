@@ -153,7 +153,74 @@ THE SOFTWARE.
 			Das .ermd Dateiformat
 		</h2>
 		<p>
-			Zusätzlich zu der graphischen Oberfläche können, dank diesem Dateformat menschen- und computer-lesbare ER-Modelle gespeichert, editiert und dargetellt werden.
+			Zus&auml;tzlich zu der graphischen Oberfl&auml;che k&ouml;nnen, dank dem .ermd-Dateiformat menschen- und computer-lesbare ER-Modelle gespeichert, editiert und dargetellt werden. Dabei werden die einzelnen Werte durch Kommata seperiert notiert.
+			<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-fymr{border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+		<table class="tg">
+			<thead>
+			<tr>
+				<th class="tg-fymr">Typ</th>
+				<th class="tg-fymr">Kennzeichnung</th>
+				<th class="tg-fymr">Daten</th>
+				<th class="tg-fymr">Beschreibung</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td class="tg-0pky">Entit&auml;t</td>
+				<td class="tg-0pky">e</td>
+				<td class="tg-0pky">e, Entit&auml;t</td>
+				<td class="tg-0pky"></td>
+			</tr>
+			<tr>
+				<td class="tg-0pky">Attribut</td>
+				<td class="tg-0pky">@</td>
+				<td class="tg-0pky">@, Entit&auml;t, Attribut, _</td>
+				<td class="tg-0pky">_ ist optional und beschreibt ein Schl&uuml;sselattribut</td>
+			</tr>
+			<tr>
+				<td class="tg-0pky">Schwache Entit&auml;t</td>
+				<td class="tg-0pky">w</td>
+				<td class="tg-0pky">w, Entit&auml;t</td>
+				<td class="tg-0pky"></td>
+			</tr>
+			<tr>
+				<td class="tg-0pky">Generalisuerung</td>
+				<td class="tg-0pky">^</td>
+				<td class="tg-0pky">^, Generalisierung, Spezialisierung</td>
+				<td class="tg-0pky"></td>
+			</tr>
+			<tr>
+				<td class="tg-0pky">Beziehung</td>
+				<td class="tg-0pky">r</td>
+				<td class="tg-0pky">r, Entit&auml;t1, Kardinalit&auml;t1, Beziehung, Kardinalit&auml;t2, Entit&auml;t2</td>
+				<td class="tg-0pky"></td>
+			</tr>
+			<tr>
+				<td class="tg-0pky">Notiz / Beschreibung</td>
+				<td class="tg-0pky">d</td>
+				<td class="tg-0pky">d, Titel, Beschreibung</td>
+				<td class="tg-0pky"></td>
+			</tr>
+			<tr>
+				<td class="tg-0pky">Aggregation</td>
+				<td class="tg-0pky">a</td>
+				<td class="tg-0pky">a, Ganzes, Teil</td>
+				<td class="tg-0pky"></td>
+			</tr>
+			</tbody>
+		</table>
+
+		<!-- Generated with: https://tablesgenerator.com -->
+			<br>
+			<i>Entit&auml;ten m&uuml;ssen nicht explizit beschrieben werden! Es ist ausreichend, wenn sie in einer Beziehung, bei einer Attributdefinition etc. vorkommen.</i>
 		</p>
 	</body>
 </html>

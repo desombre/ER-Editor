@@ -21,12 +21,13 @@ Editor for Creation and Editing of model.Entity-model.Relationship-Models
   * automatic conversion from ER-Model to relational Model
   * efficient conversion of Entities and Relationships
 * Sophisticated Rendering Algorithm
+* Human-readable and human-writable modelling language (.ermd: ER-Model Description)
 * Platform independent. Works on any Computer that has Java installed.
 * Optimized for Mac OS X: Native fullscreen and menu bar support.
 
 ## Installation
 1. Make sure you have installed JRE 1.8 or newer.
-2. Download [ER-Editor.jar](https://github.com/palle-k/ER-Editor/releases/download/3.6.0/ER-Editor.jar)
+2. Download [ER-Editor.jar](https://github.com/palle-k/ER-Editor/releases/download/3.6.0/ER-Editor.jar) (Please note: this is a link to original project)
 3. Double click the downloaded file to start ER-Editor
 
 ## Documentation
