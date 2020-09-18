@@ -28,6 +28,10 @@ import view.ERFrame;
 
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -39,8 +43,7 @@ public class ER_Editor
 	
 	private static List<ERFrame> openedFrames;
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) throws MalformedURLException {
 		try
 		{
 			System.setProperty("apple.eawt.quitStrategy", "CLOSE_ALL_WINDOWS");
@@ -52,6 +55,7 @@ public class ER_Editor
 		
 		}
 		Locale locale = Locale.getDefault();
+
 		setLOCALIZATION(ResourceBundle.getBundle("Localizable", locale));
 		setOpenedFrames(new ArrayList<>());
 		SwingUtilities.invokeLater(ERFrame::new);

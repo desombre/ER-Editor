@@ -22,13 +22,12 @@
  -->
 <project>
 
-
-
-
     <path id="build.classpath">
-        <fileset dir="lib">
-            <include name="**/*.jar"/>
-            <include name="**/*.zip"/>
+        <fileset dir="lib/jar">
+            <include name="j2html-1.3.0.jar"/>
+        </fileset>
+        <fileset dir="src/assets">
+            <include name="*.*"/>
         </fileset>
     </path>
 
@@ -41,7 +40,7 @@
         <mkdir dir="${lib-ivy.dir}"/>
 
         <get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar"
-             dest="${ivy.jar.file}" usetimestamp="true" />
+             dest="${ivy.jar.file}" usetimestamp="true"/>
 
         <taskdef resource="org/apache/ivy/ant/antlib.xml">
             <classpath>
@@ -64,31 +63,32 @@
         <delete dir="out"/>
     </target>
 
-	 <target name="compile" depends="update-lib-dir">
-       <mkdir dir="build/class"/>
-        <javac destdir="build/class" target="14" source="14" >
-            <src path="src"/>
-            <!--<classpath refid="build.classpath"/>-->
+    <target name="compile" depends="update-lib-dir">
+        <mkdir dir="build/class"/>
+        <javac srcdir="src" destdir="build/class" classpathref="build.classpath"><!--target="14" source="14" >-->
+            <!--<classpath path="./lib/jar/j2html-1.3.0.jar"/>-->
 
         </javac>
-		<copy todir="build/class">
-			<fileset dir="src" includes="**/*.properties"/>
-			<fileset dir="src" includes="**/*.png"/>
-			<fileset dir="src" includes="**/*.html"/>
-		</copy>
+        <copy todir="build/class/">
+            <fileset dir="src/assets" includes="*.properties"/>
+        </copy>
+        <copy todir="build/class/view">
+            <fileset dir="src/assets" includes="*.png"/>
+        </copy>
     </target>
 
     <target name="jar">
         <mkdir dir="build/jar"/>
         <jar destfile="build/jar/ER-Editor.jar" basedir="build/class">
-			<manifest>
-				<attribute name="ER_editor" value="main"/>
+            <manifest>
+                <attribute name="ER_editor" value="main"/>
                 <attribute name="Main-Class" value="main.ER_Editor"/>
-                <attribute name="Class-Path" value="${lib-ivy.dir}/jar" />
+                <attribute name="Class-Path" value="${build.classpath}"/>
 
             </manifest>
         </jar>
     </target>
+
     <target name="run">
         <java jar="build/jar/ER-Editor.jar" fork="true"/>
     </target>

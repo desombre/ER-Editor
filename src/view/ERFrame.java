@@ -278,7 +278,8 @@ public class ERFrame extends JFrame implements ActionListener, ERHistoryChangeNo
 			location.translate(22, 22);
 			setLocation(location);
 		}
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../icon.png")));
+
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("icon.png")));
 		addWindowListener(new WindowAdapter()
 		{
 			@Override
