@@ -44,7 +44,7 @@ public class ERFrame extends JFrame implements ActionListener, ERHistoryChangeNo
 	private ERView erView;
 	private EntityEditor		editor;
 	
-	private JMenuItem	menuNew, menuOpen, menuClose, menuSave, menuSaveAs, menuExportImage, menuExportModel;
+	private JMenuItem	menuNew, menuOpen, menuClose, menuSave, menuSaveAs, menuExportImage, menuExportModel, menuExportDescriptions;
 	private JMenuItem	menuCut, menuCopy, menuPaste, menuDelete, menuUndo, menuRedo, menuSelectAll;
 	private JMenuItem	menuAddEntity, menuAddRelationship, menuAddDescriptionBox;
 	private JMenuItem	menuZoomOriginal, menuZoomIn, menuZoomOut, menuExpand, menuImplode;
@@ -278,7 +278,7 @@ public class ERFrame extends JFrame implements ActionListener, ERHistoryChangeNo
 			location.translate(22, 22);
 			setLocation(location);
 		}
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../assets/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../icon.png")));
 		addWindowListener(new WindowAdapter()
 		{
 			@Override
@@ -399,6 +399,11 @@ public class ERFrame extends JFrame implements ActionListener, ERHistoryChangeNo
 				menuExportModel.setText(ER_Editor.getLOCALIZATION().getString("export_model"));
 				menuExportModel.addActionListener(this);
 				menuExport.add(menuExportModel);
+
+				menuExportDescriptions = new JMenuItem();
+				menuExportDescriptions.setText(ER_Editor.getLOCALIZATION().getString("export_descriptions"));
+				menuExportDescriptions.addActionListener((event) -> getModel().exportDescriptions());
+				menuExport.add(menuExportDescriptions);
 			}
 			menuFile.add(menuExport);
 		}

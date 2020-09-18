@@ -1,6 +1,6 @@
 # ER-Editor
 
-Editor for Creation and Editing of model.Entity-model.Relationship-Models
+Editor for Creation and Editing of Entity-Relationship-Models
 
 ![ER-Editor-Example](http://i.imgur.com/arXphXx.png "ER-Editor-Example")
 

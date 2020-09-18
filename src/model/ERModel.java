@@ -27,6 +27,7 @@ package model;
 import main.ER_Editor;
 import persistence.*;
 
+
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -273,4 +274,23 @@ public class ERModel implements Saveable {
 	public boolean isSaved() {
 		return saved;
 	}
+
+    public void exportDescriptions() {
+		//System.out.println(body().withText("TEST").renderFormatted());
+		JFileChooser chooser = new JFileChooser();
+		if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+			File f = chooser.getSelectedFile();
+
+			try {
+
+				DescriptionExporter exporter = new DescriptionHTMLExporter(this.descriptions);
+				//exporter.exportToDisplay();
+				exporter.exportToFile(f);
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, ER_Editor.getLOCALIZATION().getString("description_export_error_message"),
+						ER_Editor.getLOCALIZATION().getString("description_export_error_title"), JOptionPane.ERROR_MESSAGE);
+			}
+		}
+
+    }
 }

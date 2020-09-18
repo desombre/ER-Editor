@@ -21,25 +21,71 @@
 
  -->
 <project>
+
+
+
+
+    <path id="build.classpath">
+        <fileset dir="lib">
+            <include name="**/*.jar"/>
+            <include name="**/*.zip"/>
+        </fileset>
+    </path>
+
+
+    <target name="update-lib-dir">
+        <property name="lib-ivy.dir" value="lib"/>
+        <property name="ivy.install.version" value="2.4.0"/>
+        <property name="ivy.jar.file" value="${lib-ivy.dir}/ivy-${ivy.install.version}.jar"/>
+
+        <mkdir dir="${lib-ivy.dir}"/>
+
+        <get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar"
+             dest="${ivy.jar.file}" usetimestamp="true" />
+
+        <taskdef resource="org/apache/ivy/ant/antlib.xml">
+            <classpath>
+                <pathelement location="${ivy.jar.file}"/>
+            </classpath>
+        </taskdef>
+
+
+        <!-- define your destination directory here -->
+        <retrieve pattern="${lib-ivy.dir}/[type]/[artifact]-[revision].[ext]" sync="true">
+            <!-- Add all your maven dependencies here -->
+            <dependency org="com.j2html" name="j2html" rev="1.3.0"/>
+        </retrieve>
+    </target>
+
     <target name="clean">
         <delete dir="build"/>
+        <delete dir="lib-ivy"/>
+        <delete dir="lib-ant"/>
+        <delete dir="out"/>
     </target>
-	 <target name="compile">
-        <mkdir dir="build/class"/>
-        <javac srcdir="src" destdir="build/class">
-		</javac>
+
+	 <target name="compile" depends="update-lib-dir">
+       <mkdir dir="build/class"/>
+        <javac destdir="build/class" target="14" source="14" >
+            <src path="src"/>
+            <!--<classpath refid="build.classpath"/>-->
+
+        </javac>
 		<copy todir="build/class">
 			<fileset dir="src" includes="**/*.properties"/>
 			<fileset dir="src" includes="**/*.png"/>
 			<fileset dir="src" includes="**/*.html"/>
 		</copy>
     </target>
+
     <target name="jar">
         <mkdir dir="build/jar"/>
         <jar destfile="build/jar/ER-Editor.jar" basedir="build/class">
 			<manifest>
 				<attribute name="ER_editor" value="main"/>
                 <attribute name="Main-Class" value="main.ER_Editor"/>
+                <attribute name="Class-Path" value="${lib-ivy.dir}/jar" />
+
             </manifest>
         </jar>
     </target>

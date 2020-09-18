@@ -25,12 +25,8 @@ package model;
  */
 
 import main.ER_Editor;
-import model.Attribute;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.Rectangle2D;
@@ -309,6 +305,7 @@ public class Entity extends ERObject
 
 		for (int i = 0; i < getAttributes().size(); i++)
 		{
+			Attribute a = getAttributes().get(i);
 			float angle = (float) i / getAttributes().size() * -2.0f * 3.141592653f + 3.141592653f;
 			float posX = (float) (Math.cos(angle) * a_radius_x + getBounds().getCenterX());
 			float posY = (float) (Math.sin(angle) * -a_radius_y + getBounds().getCenterY());
@@ -319,11 +316,11 @@ public class Entity extends ERObject
 				g.setColor(Color.BLACK);
 			g.drawLine((int) posX, (int) posY, getBounds().x + getBounds().width / 2, getBounds().y + getBounds().height / 2);
 
-			if (getAttributes().get(i).getName().length() != 0)
+			if (a.getName().length() != 0)
 			{
 				FontRenderContext frc = g.getFontRenderContext();
-				Font f = new Font("Helvetica", Font.PLAIN, 12);
-				TextLayout tl = new TextLayout(getAttributes().get(i).getName(), f, frc);
+				Font f = new Font("Helvetica", Font.PLAIN, 14);
+				TextLayout tl = new TextLayout(a.getName(), f, frc);
 				Rectangle2D textBounds = tl.getBounds();
 
 				int radius = Math.max((int) (textBounds.getWidth() / 2) + 8, 40);
@@ -336,10 +333,11 @@ public class Entity extends ERObject
 				else
 					g.setColor(Color.BLACK);
 				g.drawOval((int) posX - radius, (int) posY - 40, 2 * radius, 80);
-				if (getAttributes().get(i).isKeyAttribute())
-					g.fillArc((int) posX - radius, (int) posY - 40, 2 * radius, 80, 180, 180);
+				if (a.isKeyAttribute())
+					g.drawLine((int) posX - radius+5, (int) posY , (int) posX + radius-5,(int) posY );
+			//g.fillArc((int) posX - radius, (int) posY - 40, 2 * radius, 80, 180, 180);
 
-				tl.draw(g, (int) (posX - textBounds.getWidth() / 2), posY + (getAttributes().get(i).isKeyAttribute() ? -2 : 3));
+				tl.draw(g, (int) (posX - textBounds.getWidth() / 2), posY + (a.isKeyAttribute() ? -2 : 3));
 			}
 
 		}
