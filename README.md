@@ -2,6 +2,8 @@
 
 Editor for Creation and Editing of Entity-Relationship-Models
 
+![Java CI](https://github.com/desombre/ER-Editor/workflows/Java%20CI/badge.svg)
+
 ![ER-Editor-Example](http://i.imgur.com/arXphXx.png "ER-Editor-Example")
 
 ## Features
