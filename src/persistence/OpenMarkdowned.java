@@ -1,6 +1,7 @@
 package persistence;
 
 import model.*;
+import view.er_objects.EntityView;
 
 import java.io.File;
 import java.io.IOException;
@@ -111,14 +112,14 @@ public class OpenMarkdowned implements Openable {
     }
 
     private Entity getOrCreateEntity(String name) {
-        Entity e = new Entity();
-        e.setName(name);
+        EntityView e = new EntityView();
+        e.getErObject().setName(name);
         if (!entities.contains(e)) {
-            entities.add(e);
+            entities.add(e.getErObject());
         } else {
-            e = entities.get(entities.indexOf(e));
+            e = entities.get(entities.indexOf(e.getErObject())).getView();
         }
-        return e;
+        return e.getErObject();
     }
 
 }

@@ -52,8 +52,8 @@ public class EntityChangeEvent extends ERChangeEvent
 	{
 		if (propertyName.equals(CHANGE_POSITION))
 		{
-			((ERObject) source).getBounds().x = ((Point) afterValue).x;
-			((ERObject) source).getBounds().y = ((Point) afterValue).y;
+			((ERObject) source).getView().getBounds().x = ((Point) afterValue).x;
+			((ERObject) source).getView().getBounds().y = ((Point) afterValue).y;
 		}
 		else if (propertyName.equals(CHANGE_POSITION_MULTIPLE))
 		{
@@ -63,8 +63,8 @@ public class EntityChangeEvent extends ERChangeEvent
 			{
 				ERObject obj = objects[i];
 				Point p = positions[i];
-				obj.getBounds().x = p.x;
-				obj.getBounds().y = p.y;
+				obj.getView().getBounds().x = p.x;
+				obj.getView().getBounds().y = p.y;
 			}
 		}
 		else if (propertyName.equals(CHANGE_NAME))
@@ -109,8 +109,8 @@ public class EntityChangeEvent extends ERChangeEvent
 	{
 		if (propertyName.equals(CHANGE_POSITION))
 		{
-			((ERObject) source).getBounds().x = ((Point) beforeValue).x;
-			((ERObject) source).getBounds().y = ((Point) beforeValue).y;
+			((ERObject) source).getView().getBounds().x = ((Point) beforeValue).x;
+			((ERObject) source).getView().getBounds().y = ((Point) beforeValue).y;
 		}
 		else if (propertyName.equals(CHANGE_POSITION_MULTIPLE))
 		{
@@ -120,8 +120,8 @@ public class EntityChangeEvent extends ERChangeEvent
 			{
 				ERObject obj = objects[i];
 				Point p = positions[i];
-				obj.getBounds().x = p.x;
-				obj.getBounds().y = p.y;
+				obj.getView().getBounds().x = p.x;
+				obj.getView().getBounds().y = p.y;
 			}
 		}
 		else if (propertyName.equals(CHANGE_NAME))

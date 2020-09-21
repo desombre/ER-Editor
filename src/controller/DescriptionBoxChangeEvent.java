@@ -1,6 +1,7 @@
 package controller;
 
 import model.ERObject;
+import view.er_objects.ERObjectView;
 
 import java.awt.Point;
 
@@ -26,8 +27,8 @@ public class DescriptionBoxChangeEvent extends ERChangeEvent
 	{
 		if (propertyName.equals(ERChangeEvent.CHANGE_POSITION))
 		{
-			((ERObject) source).getBounds().x = ((Point) afterValue).x;
-			((ERObject) source).getBounds().y = ((Point) afterValue).y;
+			((ERObjectView<ERObject>) source).getBounds().x = ((Point) afterValue).x;
+			((ERObjectView<ERObject>) source).getBounds().y = ((Point) afterValue).y;
 		}
 		else if (propertyName.equals(ERChangeEvent.CHANGE_POSITION_MULTIPLE))
 		{
@@ -37,8 +38,8 @@ public class DescriptionBoxChangeEvent extends ERChangeEvent
 			{
 				ERObject obj = objects[i];
 				Point p = positions[i];
-				obj.getBounds().x = p.x;
-				obj.getBounds().y = p.y;
+				obj.getView().getBounds().x = p.x;
+				obj.getView().getBounds().y = p.y;
 			}
 		}
 	}
@@ -48,8 +49,8 @@ public class DescriptionBoxChangeEvent extends ERChangeEvent
 	{
 		if (propertyName.equals(ERChangeEvent.CHANGE_POSITION))
 		{
-			((ERObject) source).getBounds().x = ((Point) beforeValue).x;
-			((ERObject) source).getBounds().y = ((Point) beforeValue).y;
+			((ERObject) source).getView().getBounds().x = ((Point) beforeValue).x;
+			((ERObject) source).getView().getBounds().y = ((Point) beforeValue).y;
 		}
 		else if (propertyName.equals(ERChangeEvent.CHANGE_POSITION_MULTIPLE))
 		{
@@ -59,8 +60,8 @@ public class DescriptionBoxChangeEvent extends ERChangeEvent
 			{
 				ERObject obj = objects[i];
 				Point p = positions[i];
-				obj.getBounds().x = p.x;
-				obj.getBounds().y = p.y;
+				obj.getView().getBounds().x = p.x;
+				obj.getView().getBounds().y = p.y;
 			}
 		}
 	}

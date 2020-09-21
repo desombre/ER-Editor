@@ -26,6 +26,13 @@ package model;
 
 import main.ER_Editor;
 import persistence.*;
+import persistence.exporter.Exporter;
+import persistence.exporter.HTMLExporter;
+import persistence.filter.CSVFilter;
+import persistence.filter.ExportableFileFormat;
+import persistence.filter.HTMLFilter;
+import view.er_objects.ERObjectView;
+import view.er_objects.EntityView;
 
 
 import javax.imageio.ImageIO;
@@ -44,6 +51,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ERModel implements Saveable {
 
@@ -95,8 +103,8 @@ public class ERModel implements Saveable {
 
 	public void addEntity() {
 		for (Entity e1 : getEntities())
-			e1.deselect();
-		getEntities().add(new Entity());
+			e1.getView().deselect();
+		getEntities().add(new EntityView().getErObject());
 	}
 
 	public void export() {
@@ -153,13 +161,13 @@ public class ERModel implements Saveable {
 		int maxY = 0;
 
 		for (Relationship r : getRelationships()) {
-			Rectangle bounds = r.getBounds();
+			Rectangle bounds = r.getView().getBounds();
 			maxX = (int) Math.max(maxX, bounds.getMaxX() + 200);
 			maxY = (int) Math.max(maxY, bounds.getMaxY() + 200);
 		}
 
 		for (Entity e : getEntities()) {
-			Rectangle bounds = e.getBounds();
+			Rectangle bounds = e.getView().getBounds();
 			maxX = (int) Math.max(maxX, bounds.getMaxX() + 200);
 			maxY = (int) Math.max(maxY, bounds.getMaxY() + 200);
 		}
@@ -172,11 +180,11 @@ public class ERModel implements Saveable {
 		g.fillRect(0, 0, maxX * 2, maxY * 2);
 		g.scale(2.0f, 2.0f);
 
-		for (Relationship r : getRelationships()) {
+		for (ERObjectView<Relationship> r : getRelationshipViews()) {
 			r.deselect();
 			r.paint(g);
 		}
-		for (Entity e : getEntities()) {
+		for (ERObjectView<Entity> e : getEntityViews()) {
 			e.deselect();
 			e.paint(g);
 		}
@@ -278,14 +286,17 @@ public class ERModel implements Saveable {
     public void exportDescriptions() {
 		//System.out.println(body().withText("TEST").renderFormatted());
 		JFileChooser chooser = new JFileChooser();
+		chooser.setAcceptAllFileFilterUsed(false);
+		chooser.addChoosableFileFilter(new HTMLFilter());
+		chooser.addChoosableFileFilter(new CSVFilter());
+
+
 		if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 			File f = chooser.getSelectedFile();
-
 			try {
 
-				DescriptionExporter exporter = new DescriptionHTMLExporter(this.descriptions);
-				//exporter.exportToDisplay();
-				exporter.exportToFile(f);
+				((ExportableFileFormat<DescriptionBox>) chooser.getFileFilter())
+						.export(this.descriptions, f);
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, ER_Editor.getLOCALIZATION().getString("description_export_error_message"),
 						ER_Editor.getLOCALIZATION().getString("description_export_error_title"), JOptionPane.ERROR_MESSAGE);
@@ -293,4 +304,23 @@ public class ERModel implements Saveable {
 		}
 
     }
+
+	public List<ERObjectView<Entity>> getEntityViews() {
+		return entities.stream().map(entity -> entity.getView()).collect(Collectors.toCollection(ArrayList::new));
+	}
+
+	public List<ERObjectView<Relationship>> getRelationshipViews() {
+		return relationships.stream().map(Relationship::getView).collect(Collectors.toCollection(ArrayList::new));
+	}
+
+	public List<ERObjectView<DescriptionBox>> getDescriptionViews() {
+		return descriptions.stream().map(DescriptionBox::getView).collect(Collectors.toCollection(ArrayList::new));
+	}
+
+	public List<ERObjectView> getAllERObjectViews() {
+		List erViewList = this.getEntityViews();
+		erViewList.addAll(this.getRelationshipViews());
+		erViewList.addAll(this.getDescriptionViews());
+		return erViewList;
+	}
 }
