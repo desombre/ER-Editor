@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface Exporter<U extends ERObject> {
 
-    void setData(List<U> descriptions);
+    void setData(List<U> data);
 
 
     public default void exportToFile(File f) throws IOException {

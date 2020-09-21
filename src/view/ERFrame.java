@@ -44,7 +44,7 @@ public class ERFrame extends JFrame implements ActionListener, ERHistoryChangeNo
 	private ERView erView;
 	private EntityEditor		editor;
 	
-	private JMenuItem	menuNew, menuOpen, menuClose, menuSave, menuSaveAs, menuExportImage, menuExportModel, menuExportDescriptions;
+	private JMenuItem	menuNew, menuOpen, menuClose, menuSave, menuSaveAs, menuExportImage, menuExportModel, menuExportDescriptions, menuExportEntitiesForCRUDAnalysis;
 	private JMenuItem	menuCut, menuCopy, menuPaste, menuDelete, menuUndo, menuRedo, menuSelectAll;
 	private JMenuItem	menuAddEntity, menuAddRelationship, menuAddDescriptionBox;
 	private JMenuItem	menuZoomOriginal, menuZoomIn, menuZoomOut, menuExpand, menuImplode;
@@ -405,6 +405,11 @@ public class ERFrame extends JFrame implements ActionListener, ERHistoryChangeNo
 				menuExportDescriptions.setText(ER_Editor.getLOCALIZATION().getString("export_descriptions"));
 				menuExportDescriptions.addActionListener((event) -> getModel().exportDescriptions());
 				menuExport.add(menuExportDescriptions);
+
+				menuExportEntitiesForCRUDAnalysis = new JMenuItem();
+				menuExportEntitiesForCRUDAnalysis.setText(ER_Editor.getLOCALIZATION().getString("export_for_crud"));
+				menuExportEntitiesForCRUDAnalysis.addActionListener((event) -> getModel().exportForCRUD());
+				menuExport.add(menuExportEntitiesForCRUDAnalysis);
 			}
 			menuFile.add(menuExport);
 		}

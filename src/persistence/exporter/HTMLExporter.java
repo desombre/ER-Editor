@@ -25,7 +25,6 @@ public class HTMLExporter implements Exporter<DescriptionBox> {
                 head(
                         title(LOCALIZATION.getString("description_default_text")),
                         link().withRel("stylesheet").withHref("https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
-
                 ),
                 body(
                         table(thead(
@@ -47,8 +46,8 @@ public class HTMLExporter implements Exporter<DescriptionBox> {
 
 
     @Override
-    public void setData(List<DescriptionBox> descriptions) {
-        this.descriptions = descriptions;
+    public void setData(List<DescriptionBox> data) {
+        this.descriptions = data;
     }
 
     @Override

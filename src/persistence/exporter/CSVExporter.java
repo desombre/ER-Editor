@@ -15,8 +15,8 @@ public class CSVExporter implements Exporter<DescriptionBox> {
     }
 
     @Override
-    public void setData(List<DescriptionBox> descriptions) {
-        this.descriptions = descriptions;
+    public void setData(List<DescriptionBox> data) {
+        this.descriptions = data;
     }
 
     @Override
